@@ -2,12 +2,17 @@
 //grabbing required dependencies to use for requests
 const express = require('express');
 const {graphqlHTTP} = require('express-graphql');
-const schema = require('./schema/schema')
+const schema = require('./schema/schema');
+const mongoose = require('mongoose');
 
 //creating express app
 const app = express();
 
-
+//connect to mlab
+mongoose.connect('mongodb+srv://michael_ore:test123@graphqltutorial.ahrs3.mongodb.net/test');
+mongoose.connection.once('open',() => {
+    console.log('connected to database')
+})
 
 //creating master endpoint (middleware), that will be passed to graph QL for handdling **this must contain a schema**
 app.use('/graphql', graphqlHTTP({
