@@ -4,9 +4,13 @@ const express = require('express');
 const {graphqlHTTP} = require('express-graphql');
 const schema = require('./schema/schema');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 //creating express app
 const app = express();
+
+//allow cross origin requests
+app.use(cors())
 
 //connect to mlab
 mongoose.connect('mongodb+srv://michael_ore:test123@graphqltutorial.ahrs3.mongodb.net/test');
